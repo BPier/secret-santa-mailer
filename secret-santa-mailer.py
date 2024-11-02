@@ -57,7 +57,7 @@ class Mailer():
         for r in range(len(santa.recipients)):
             if r==0:
                 recipients = santa.recipients[r].name
-            elif r==len(santa.recipients):
+            elif r==(len(santa.recipients)-1):
                 recipients=f"{recipients} et {santa.recipients[r].name}"
             else:
                 recipients=f"{recipients}, {santa.recipients[r].name}"
@@ -162,13 +162,13 @@ def send_secret_santa_emails(mailer, santas, record_file, dry_run):
     print(f'\nMail record saved to: {record_file}')
 
 
-def create_secret_santa_pairs(santa_dct, incompatibles):
+def create_secret_santa_pairs(santa_dct, incompatibles, numberofrecipients):
     santas = list(map(lambda s: Santa(s[0], s[1]), santa_dct.items()))
 
     check_emails(santas)
     check_compatibilities(santas, incompatibles)
 
-    for i in range(3):
+    for i in range(numberofrecipients):
         while True:
             random.shuffle(santas)
             # print(santas)
@@ -244,7 +244,8 @@ def main():
         dry_run = not args.official
 
         santas = create_secret_santa_pairs(config['santas'],
-                                           config['incompatibles'])
+                                           config['incompatibles'],
+                                           config['numberofrecipients'])
         send_secret_santa_emails(mailer, santas,
                                  config['secret_santa_record_file'],
                                  dry_run)
