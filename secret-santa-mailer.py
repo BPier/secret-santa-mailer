@@ -53,9 +53,15 @@ class Mailer():
             f'{self.body}\n'
 
         message = message.replace('{santa}', santa.name)
-        message = message.replace('{recipient1}', santa.recipients[0].name)
-        message = message.replace('{recipient2}', santa.recipients[1].name)
-        message = message.replace('{recipient3}', santa.recipients[2].name)
+        recipients=""
+        for r in range(len(santa.recipients)):
+            if r==0:
+                recipients = santa.recipients[r].name
+            elif r==len(santa.recipients):
+                recipients=f"{recipients} et {santa.recipients[r].name}"
+            else:
+                recipients=f"{recipients}, {santa.recipients[r].name}"
+        message = message.replace('{recipient}', recipients)
 
         return message
 

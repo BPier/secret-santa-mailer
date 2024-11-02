@@ -1,2 +1,3 @@
 # Don't track the secret santa email record!
 *.txt
+config.py
