@@ -2,11 +2,11 @@
 # SMTP configuration settings.
 ################################################################################
 smtp = {
-    'username': 'username',
-    'password': 'password',
-    'host': 'email-smtp.example.com',
+    'username': 'pierrick_mailserver@mg.blaise.lc',
+    'password': 'Moonwalk9-Defraud-Uncertain',
+    'host': 'smtp.eu.mailgun.org',
     'port': 587,
-    'from_email': 'email-used-to-send-letters@example.com',
+    'from_email': 'secretsanta@blaise.lc',
 }
 
 ################################################################################
@@ -21,7 +21,7 @@ email_template = {
     'body': """
 Ho Ho Ho!
 
-{santa}, you are {recipient}'s secret Santa!
+{santa}, tu es le secret santa de {recipient1}, {recipient2} et {recipient3} !
 
 Merry Christmas!
 """
@@ -31,14 +31,15 @@ Merry Christmas!
 # The complete list of all the secret santa's and their email addresses.
 ################################################################################
 santas = {
-    'James': 'james@example.com',
-    'Mary': 'mary@example.com',
-    'Nancy': 'nancy@example.com',
-    'John': 'john@example.com',
-    'Michael': 'michael@example.com',
-    'Lisa': 'lisa@example.com',
-    'David': 'david@example.com',
-    'Linda': 'linda@example.com',
+    # 'James': 'james@example.com',
+    'Pierrick' : 'pierrick@blaise.lc',
+    'Siona' : 'siona@blaise.lc',
+    'Joyce' : 'joyce@blaise.lc',
+    'Genevieve' : 'genevieve@blaise.lc',
+    'Emmanuelle' : 'emmanuelle@blaise.lc',
+    'Soline' : 'soline@blaise.lc',
+    'Hugo' : 'hugo@blaise.lc',
+    'Benoit' : 'benoit@blaise.lc'
 }
 
 ################################################################################
@@ -49,13 +50,13 @@ santas = {
 ################################################################################
 incompatibles = {
     # Do not allow James to be santa for Mary
-    'James': ('Mary',),
+    # 'James': ('Mary',),
 
     # Do not allow Mary to be santa for James
-    'Mary': ('James',),
+    # 'Mary': ('James',),
 
     # Do not allow Nancy to be santa for John or Mary
-    'Nancy': ('John', 'Mary',),
+    # 'Nancy': ('John', 'Mary',),
 
     # Something like below is bad, Linda can't be a secret santa for anyone!
 #   'Linda': ('James', 'Mary', 'Nancy', 'John', 'Michael', 'Lisa', 'David'),

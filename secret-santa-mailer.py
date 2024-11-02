@@ -16,6 +16,7 @@ class Santa():
         self.name = name
         self.email = email
         self.recipient = None
+        self.recipients = []
 
     def __eq__(self, other):
         return self.name.lower() == other.name.lower()
@@ -52,7 +53,9 @@ class Mailer():
             f'{self.body}\n'
 
         message = message.replace('{santa}', santa.name)
-        message = message.replace('{recipient}', santa.recipient.name)
+        message = message.replace('{recipient1}', santa.recipients[0].name)
+        message = message.replace('{recipient2}', santa.recipients[1].name)
+        message = message.replace('{recipient3}', santa.recipients[2].name)
 
         return message
 
@@ -83,6 +86,10 @@ def is_santa_list_compatible(santas_lst, incompatibles):
                 recipient in incompatibles[santa]:
             return False
 
+        for r in santas_lst[k].recipients:
+            previousrecipient = r.name
+            if previousrecipient == recipient:
+                return False
     return True
 
 
@@ -155,17 +162,21 @@ def create_secret_santa_pairs(santa_dct, incompatibles):
     check_emails(santas)
     check_compatibilities(santas, incompatibles)
 
-    while True:
-        random.shuffle(santas)
+    for i in range(3):
+        while True:
+            random.shuffle(santas)
+            # print(santas)
+            if is_santa_list_compatible(santas, incompatibles):
+                break
 
-        if is_santa_list_compatible(santas, incompatibles):
-            break
+        # Round-robin pairing of the randomly shuffled santas
+        for k in range(len(santas) - 1):
+            santas[k].recipient = santas[k+1]
 
-    # Round-robin pairing of the randomly shuffled santas
-    for k in range(len(santas) - 1):
-        santas[k].recipient = santas[k+1]
-
-    santas[-1].recipient = santas[0]
+        santas[-1].recipient = santas[0]
+        for s in santas:
+            s.recipients.append(s.recipient)
+    
 
     return santas
 
