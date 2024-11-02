@@ -7,6 +7,8 @@ of who their gift recipient is.
 It ensures that no one knows who their secret santa is... **not even you**! (That
 is, unless you really want to know).
 
+## Fork
+This fork is adding 3 recipient for each Secret Santa
 
 # Requirements
 
